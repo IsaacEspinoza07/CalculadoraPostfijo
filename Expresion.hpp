@@ -11,7 +11,7 @@ public:
     bool EsValida();
 
     // Para capturar en infijo
-    Expresion Capturar();
+    void Capturar();
 
     // Para dada una en postfijo, pasarla a infijo
     // Publica para que tambien se pueda meter directamente una en postfijo
@@ -22,15 +22,8 @@ public:
 
     float Evaluar();
 
-    /*
-    Flujo:
-    1- Capturar -> APostfijo -> guardar en atributo
-
-    2- Evaluar (usando pilas)
-
-    Listo!
-    */
-
+    // TODO: Crear excepcion de la clase para cuando
+    // se mete una expresión no valida..
 
 
 private:
@@ -39,6 +32,7 @@ private:
     bool valida;
 
     int Precedencia(const char a);
+
 
 };
 

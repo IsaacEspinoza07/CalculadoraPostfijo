@@ -23,7 +23,11 @@ int main()
     */
     try{
         Expresion e;
+        e.Capturar();
+
+        e.ImprimirInfijo();
         e.APostfijo();
+        e.ImprimirPostfijo();
         //    {[(a+b)*c]^2/(d-c)}*(a-b)
 
     }catch(const char* error){
