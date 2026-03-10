@@ -32,6 +32,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Expresion.cpp" />
+		<Unit filename="Expresion.hpp" />
 		<Unit filename="Pila.hpp" />
 		<Unit filename="Pila.tpp" />
 		<Unit filename="main.cpp" />

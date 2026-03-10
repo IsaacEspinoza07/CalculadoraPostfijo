@@ -1,7 +1,8 @@
 # depslib dependency file v1.0
-1773103689 source:/home/isaac07/Proyectos/cpp/Tarea_3-AplicacionDePilas/main.cpp
+1773109698 source:/home/isaac07/Proyectos/cpp/Tarea_3-AplicacionDePilas/main.cpp
 	<iostream>
 	"Pila.hpp"
+	"Expresion.hpp"
 
 1773083932 /home/isaac07/Proyectos/cpp/Tarea_3-AplicacionDePilas/Pila.hpp
 	"Pila.tpp"
@@ -10,9 +11,11 @@
 	<exception>
 	<iostream>
 
-1773103802 source:/home/isaac07/Proyectos/cpp/Tarea_3-AplicacionDePilas/Expresion.cpp
+1773114280 source:/home/isaac07/Proyectos/cpp/Tarea_3-AplicacionDePilas/Expresion.cpp
 	"Expresion.hpp"
+	"Pila.hpp"
+	<iostream>
 
-1773103733 /home/isaac07/Proyectos/cpp/Tarea_3-AplicacionDePilas/Expresion.hpp
+1773111076 /home/isaac07/Proyectos/cpp/Tarea_3-AplicacionDePilas/Expresion.hpp
 	<string>
 

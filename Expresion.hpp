@@ -2,6 +2,7 @@
 #define EXPRESION_HPP_INCLUDED
 
 #include <string>
+using std::string;
 
 class Expresion{
 public:
@@ -14,7 +15,7 @@ public:
 
     // Para dada una en postfijo, pasarla a infijo
     // Publica para que tambien se pueda meter directamente una en postfijo
-    Expresion APostfijo();
+    void APostfijo();
 
     void ImprimirInfijo();
     void ImprimirPostfijo();
@@ -37,6 +38,7 @@ private:
     std::string exp_postfijo;
     bool valida;
 
+    int Precedencia(const char a);
 
 };
 

@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Pila.hpp"
+#include "Expresion.hpp"
 
 using namespace std;
 
@@ -21,11 +22,9 @@ int main()
 
     */
     try{
-
-        string prueba = "Hola Mundo";
-
-        cout << prueba[5];
-
+        Expresion e;
+        e.APostfijo();
+        //    {[(a+b)*c]^2/(d-c)}*(a-b)
 
     }catch(const char* error){
         cerr << "Error: " << error << endl;
