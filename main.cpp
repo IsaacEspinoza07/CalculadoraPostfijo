@@ -25,10 +25,11 @@ int main()
         Expresion e;
         e.Capturar();
 
-        e.ImprimirInfijo();
+        cout << "Infijo: "; e.ImprimirInfijo(); cout << endl;
         e.APostfijo();
-        e.ImprimirPostfijo();
+        cout << "Postfijo: "; e.ImprimirPostfijo(); cout << endl;
         //    {[(a+b)*c]^2/(d-c)}*(a-b)
+        cout << e.Evaluar();
 
     }catch(const char* error){
         cerr << "Error: " << error << endl;

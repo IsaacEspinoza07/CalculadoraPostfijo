@@ -20,7 +20,7 @@ public:
     void ImprimirInfijo();
     void ImprimirPostfijo();
 
-    float Evaluar();
+    double Evaluar();
 
     // TODO: Crear excepcion de la clase para cuando
     // se mete una expresión no valida..

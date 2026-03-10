@@ -1,18 +1,21 @@
 #include "Expresion.hpp"
 #include "Pila.hpp"
 #include <iostream>
+#include <cmath>
 
 using std::cout, std::cin;
 
 // ==== CONSTUCTORES ==== //
 
 // Constructor vacio y no es valido
-Expresion::Expresion(): exp_infijo(""), valida(false) {}
+Expresion::Expresion(): exp_infijo(""), exp_postfijo(""), valida(false) {}
 
 // Constructor con un argumento (entrada de la expresion)
 Expresion::Expresion(string exp_infijo)
 {
     this->exp_infijo = exp_infijo;
+    this->exp_postfijo = "";
+    this->valida = false;
     APostfijo();
     // aqui ya se dice si fue valida o no, internamente en la transformación
 }
@@ -26,6 +29,7 @@ void Expresion::Capturar()
     // capturamos todo el infijo y lo guardamos
     cout << "Capture una expresión en infijo: ";
     getline(cin, exp_infijo);
+    APostfijo(); // ahora validamos y transformamos
 }
 
 
@@ -33,6 +37,8 @@ void Expresion::Capturar()
 // ========================== //
 void Expresion::APostfijo()
 {
+    exp_postfijo = ""; // Si no lo vacias a cada que se llama, se te duplica (catastrofico)
+
     Pila<char>  validacion, // A este solo le llegan los () [] {}
                 conversion; // A este tanto ()[]{} como +-*/^
 
@@ -159,25 +165,56 @@ void Expresion::ImprimirPostfijo()
 }
 
 // ========================== //
-/*
-float Expresion::Evaluar()
+
+double Expresion::Evaluar()
 {
 
+    if(!EsValida()) throw "La expresi\242n no es v\240lida para evaluar";
+    // si sí fue valida, pues proseguimos.
 
+    string aux;
+    Pila<double> eval;
+    double a,b,res;
+
+    for(int i = 0; i < (int)exp_postfijo.length(); ++i){
+        char c = exp_postfijo[i];
+
+        // buscamos numeros reales
+        if(isdigit(c) || c == '.'){
+            // acumular dígitos en aux
+            aux += c;
+        }
+        else if(c == '$'){ // si acabamos un numero...
+
+            // convertir aux a double y meterlo a la pila
+            eval.Agregar(stod(aux));
+            aux = "";
+        }
+        else if(c=='+' || c=='-' || c=='*' || c=='/' || c=='^'){
+            b = eval.ObtenerTope(); eval.Eliminar();
+            a = eval.ObtenerTope(); eval.Eliminar();
+
+            if(c == '+') res = a+b;
+            if(c == '-') res = a-b;
+            if(c == '*') res = a*b;
+            if(c == '/') res = a/b;
+            if(c == '^') res = pow(a,b);
+
+            eval.Agregar(res); // y lo metemos a la pila.
+        }
+
+    }
+    return eval.ObtenerTope();
 }
-
 
 // ========================== //
 
 bool Expresion::EsValida()
 {
-
-
+    return valida;
 }
 
-*/
-
-
+// ========================== //
 
 int Expresion::Precedencia(const char a)
 {
