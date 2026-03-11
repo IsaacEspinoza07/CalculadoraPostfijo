@@ -11,14 +11,13 @@ int main()
         cout << " === Calculadora (internamente en posfijo) ===\n\n";
 
         // 1- Capturación de INFIJO
-        cout << "Capture una expresión en infijo: ";
+        cout << "Capture una expresi\242n en infijo: ";
         e.Capturar();
 
         // 2- Evaluar e imprimir.
-        cout << "postifjo: "; e.ImprimirPostfijo(); cout <<endl;
+        cout << "\nExpresi\242n postfijo: ";e.ImprimirPostfijo(); cout <<endl;
+
         cout << e.Evaluar() << endl;
-
-
 
 
     }catch (Expresion::ExpresionInvalida &error) {
@@ -34,7 +33,7 @@ int main()
         cerr << "Error: " << error << endl;
 
     }catch(...){
-        cerr << "Ocurri\242 un error inesperado.";
+        cerr << "Ocurri\242 un error inesperado.\n";
     }
 
     return 0;

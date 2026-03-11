@@ -20,3 +20,24 @@
 1773204891 /home/isaac07/Proyectos/cpp/Tarea_3-AplicacionDePilas/Expresion.hpp
 	<string>
 
+1773205716 source:c:\users\isaacuwu\downloads\calculadorapostfijo-main\expresion.cpp
+	"Expresion.hpp"
+	"Pila.hpp"
+	<iostream>
+	<cmath>
+
+1773206205 c:\users\isaacuwu\downloads\calculadorapostfijo-main\expresion.hpp
+	<string>
+
+1773205827 c:\users\isaacuwu\downloads\calculadorapostfijo-main\pila.hpp
+	"Pila.tpp"
+
+1773204934 c:\users\isaacuwu\downloads\calculadorapostfijo-main\pila.tpp
+	<exception>
+	<iostream>
+
+1773206404 source:c:\users\isaacuwu\downloads\calculadorapostfijo-main\main.cpp
+	<iostream>
+	"Pila.hpp"
+	"Expresion.hpp"
+

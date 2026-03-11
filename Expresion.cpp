@@ -16,8 +16,7 @@ Expresion::Expresion(string exp_infijo)
     this->exp_infijo = exp_infijo;
     this->exp_postfijo = "";
     this->valida = false;
-    APostfijo();
-    // aqui ya se dice si fue valida o no, internamente en la transformación
+    APostfijo();// aqui ya se dice si fue valida o no, internamente en la transformación
 }
 
 
@@ -27,7 +26,6 @@ Expresion::Expresion(string exp_infijo)
 void Expresion::Capturar()
 {
     // capturamos todo el infijo y lo guardamos
-
     getline(cin, exp_infijo);
     APostfijo(); // ahora validamos y transformamos
 }

@@ -139,7 +139,6 @@ class Pila
          */
         void Imprimir() const;
 
-        // TODO: Hacer una excepcion propia de la clase: "EstaVacia";
         /** \brief Clase para las excepciones del tipo "Pila Vac&iacute;a"
          */
         class PilaVacia : public std::exception
