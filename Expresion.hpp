@@ -24,7 +24,14 @@ public:
 
     // TODO: Crear excepcion de la clase para cuando
     // se mete una expresión no valida..
-
+    class ExpresionInvalida : public std::exception
+    {
+    public:
+        ExpresionInvalida() noexcept;
+        virtual const char *what() const noexcept;
+    private:
+        const char *mensaje;
+    };
 
 private:
     std::string exp_infijo;

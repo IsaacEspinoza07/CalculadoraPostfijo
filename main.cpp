@@ -31,8 +31,20 @@ int main()
         //    {[(a+b)*c]^2/(d-c)}*(a-b)
         cout << e.Evaluar();
 
-    }catch(const char* error){
+    }catch (Expresion::ExpresionInvalida &error) {
+        cerr << "Error: " << error.what() << endl;
+
+    }catch (Pila<double>::PilaVacia &error) { // Este cacha la clase PilaVacia
+        cerr << "Error: " << error.what() << endl;
+
+    }catch (Pila<char>::PilaVacia &error) { // Este cacha la clase PilaVacia
+        cerr << "Error: " << error.what() << endl;
+
+    }catch(const char* error){ // Cacha el Agregar()
         cerr << "Error: " << error << endl;
+
+    }catch(...){
+        cerr << "Ocurri\242 un error inesperado.";
     }
 
     return 0;

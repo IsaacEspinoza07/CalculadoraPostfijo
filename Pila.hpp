@@ -25,6 +25,15 @@ class Pila
         void Imprimir() const;
 
         // TODO: Hacer una excepcion propia de la clase: "EstaVacia";
+        class PilaVacia : public std::exception
+        {
+          public:
+            PilaVacia() noexcept; // así le digo que PilaVacia() NO lanza
+                                  // excepciones
+            virtual const char *what() const noexcept;
+          private:
+            const char *mensaje;
+        };
 
     private:
         int num_elem;

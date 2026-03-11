@@ -67,7 +67,7 @@ void Pila<T>::Agregar(T n)
 template<typename T>
 void Pila<T>::Eliminar()
 {
-    if(EstaVacia()) throw "La pila esta vac\242a"; // TODO: excepción propia de la pila
+    if(EstaVacia()) throw PilaVacia(); // TODO: excepción propia de la pila
     Elemento *temp = tope;
     tope = tope->siguiente;
     delete temp;
@@ -77,7 +77,7 @@ void Pila<T>::Eliminar()
 template<typename T>
 T Pila<T>::ObtenerTope() const
 {
-    if(EstaVacia()) throw "La pila esta vac\242a"; // TODO: excepción propia de la pila
+    if(EstaVacia()) throw PilaVacia(); // TODO: excepción propia de la pila
     return tope->valor;
 }
 // ***************************************** //
@@ -121,7 +121,14 @@ Pila<T>::Elemento::Elemento(T n, Elemento *sig/*= nullptr*/): valor(n), siguient
 
 // ***************************************** //
 
+template<typename T>
+Pila<T>::PilaVacia::PilaVacia() noexcept {}
 
+template<typename T>
+const char *Pila<T>::PilaVacia::what() const noexcept
+{
+    return "La pila se encuentra vac\241a\n";
+}
 
 
 

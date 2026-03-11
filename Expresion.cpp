@@ -169,7 +169,7 @@ void Expresion::ImprimirPostfijo()
 double Expresion::Evaluar()
 {
 
-    if(!EsValida()) throw "La expresi\242n no es v\240lida para evaluar";
+    if(!EsValida()) throw ExpresionInvalida();
     // si sí fue valida, pues proseguimos.
 
     string aux;
@@ -223,4 +223,12 @@ int Expresion::Precedencia(const char a)
     if(a == '+' || a == '-') return 1; //menor procedencia en los operadores
 
     return 0; // si me dan un (, [, {
+}
+
+// ========================== //
+Expresion::ExpresionInvalida::ExpresionInvalida() noexcept {}
+
+const char *Expresion::ExpresionInvalida::what() const noexcept
+{
+    return "La expresi\242n no es v\240lida para evaluar\n";
 }
