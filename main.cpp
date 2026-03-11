@@ -6,30 +6,20 @@ using namespace std;
 
 int main()
 {
-    /*
-    Por testear para funcionamiento de TemplatePilaEnlazada:
-    - [x] Agregar()
-    - [x] Eliminar()
-    - [x] ObtenerTope()
-    - [x] ObtenerTam()
-    - [x] EstaVacia()
-    - [x] Vaciar()
-    - [x] Imprimir()
-
-    - [x] Excepción de la clase
-
-    - [x] DIFERENTES TIPOS DE DATO
-
-    */
     try{
         Expresion e;
+        cout << " === Calculadora (internamente en posfijo) ===\n\n";
+
+        // 1- Capturación de INFIJO
+        cout << "Capture una expresión en infijo: ";
         e.Capturar();
 
-        cout << "Infijo: "; e.ImprimirInfijo(); cout << endl;
-        e.APostfijo();
-        cout << "Postfijo: "; e.ImprimirPostfijo(); cout << endl;
-        //    {[(a+b)*c]^2/(d-c)}*(a-b)
-        cout << e.Evaluar();
+        // 2- Evaluar e imprimir.
+        cout << "postifjo: "; e.ImprimirPostfijo(); cout <<endl;
+        cout << e.Evaluar() << endl;
+
+
+
 
     }catch (Expresion::ExpresionInvalida &error) {
         cerr << "Error: " << error.what() << endl;

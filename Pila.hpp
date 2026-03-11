@@ -7,37 +7,40 @@
  * \code {.cpp}
  * int main()
 {
-    // Aqui probamos la Pila pero con ENTEROS
-    cout << "Pila de enteros: " << endl;
-    try {
-        Pila<int> p;
-        for(int i = 0; i < 15; ++i){
-            p.Agregar(i);
-        }
-        p.Imprimir();
-        cout << p.ObtenerCapacidad() << endl;
-        p.Agregar(67);
-        cout << p.ObtenerCapacidad() << endl;
-        for(int i = 0; i < 15; ++i){
-            p.Agregar(i);
-        }
-        cout << p.ObtenerCapacidad();
+    try{
+        Expresion e;
+        cout << " === Calculadora (internamente en posfijo) ===\n\n";
 
-        return 0;
+        // 1- Capturación de INFIJO
+        cout << "Capture una expresión en infijo: ";
+        e.Capturar();
+
+        // 2- Evaluar e imprimir.
+        cout << "postifjo: "; e.ImprimirPostfijo(); cout <<endl;
+        cout << e.Evaluar() << endl;
 
 
 
 
-    } catch (const char *error) { // Este cacha el p.agregar().
-        cerr << "Error: " << error << endl;
-    } catch (Pila<int>::PilaVacia &error) { // Este cacha la clase PilaVacia
+    }catch (Expresion::ExpresionInvalida &error) {
         cerr << "Error: " << error.what() << endl;
-    } catch (...) {
-        cerr << "Ocurri\242 un error inesperado" << endl;
+
+    }catch (Pila<double>::PilaVacia &error) { // Este cacha la clase PilaVacia
+        cerr << "Error: " << error.what() << endl;
+
+    }catch (Pila<char>::PilaVacia &error) { // Este cacha la clase PilaVacia
+        cerr << "Error: " << error.what() << endl;
+
+    }catch(const char* error){ // Cacha el Agregar()
+        cerr << "Error: " << error << endl;
+
+    }catch(...){
+        cerr << "Ocurri\242 un error inesperado.";
     }
-    cout << endl;
 
     return 0;
+}
+
  *  }
  * \endcode
  */

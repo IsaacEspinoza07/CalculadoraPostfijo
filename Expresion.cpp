@@ -27,7 +27,7 @@ Expresion::Expresion(string exp_infijo)
 void Expresion::Capturar()
 {
     // capturamos todo el infijo y lo guardamos
-    cout << "Capture una expresión en infijo: ";
+
     getline(cin, exp_infijo);
     APostfijo(); // ahora validamos y transformamos
 }
@@ -81,6 +81,13 @@ void Expresion::APostfijo()
         }
         // elseif pa que no haga cosas cuando no debe. Checar todos los operadores.
         else if(c=='+' || c=='-' || c=='*' || c=='/' || c=='^'){
+            int j = i - 1;
+            while(j >= 0 && e[j] == ' ') j--;
+            if(j >= 0 && (e[j]=='+' || e[j]=='-' || e[j]=='*' || e[j]=='/' || e[j]=='^')){
+                this->valida = false;
+                return;
+            }
+
             // Detectar si es unario
             bool esUnario = false;
             if(i == 0){
@@ -111,11 +118,20 @@ void Expresion::APostfijo()
         }
         // aqui metemos los operandos (numeros, punto decimal)
         // e ir agregando los separadores '$' al terminar cada numero
-        else if(isdigit(c) || c == '.'){
+        else if(isdigit(c) || c == '.' || c == 'e' || c == 'E'){
             this->exp_postfijo += c;
 
-            // El numero termino si: es el ultimo char, o el siguiente NO es digito ni punto
-            if(i == (int)e.length() - 1 || (!isdigit(e[i+1]) && e[i+1] != '.')){
+            // Si es 'e' o 'E', consumir el signo del exponente si lo hay
+            if((c == 'e' || c == 'E') && i+1 < (int)e.length()){
+                if(e[i+1] == '+' || e[i+1] == '-'){
+                    ++i;
+                    this->exp_postfijo += e[i];
+                }
+            }
+
+            // El numero termino si: es el ultimo char, o el siguiente NO es digito, punto, e, E
+            if(i == (int)e.length() - 1 ||
+               (!isdigit(e[i+1]) && e[i+1] != '.' && e[i+1] != 'e' && e[i+1] != 'E')){
                 this->exp_postfijo += '$';
             }
         }
@@ -169,7 +185,7 @@ void Expresion::ImprimirPostfijo()
 double Expresion::Evaluar()
 {
 
-    if(!EsValida()) throw ExpresionInvalida();
+    if(!EsValida()) throw ExpresionInvalida("La expresi\242n no es v\240lida para evaluar\n");
     // si sí fue valida, pues proseguimos.
 
     string aux;
@@ -180,7 +196,7 @@ double Expresion::Evaluar()
         char c = exp_postfijo[i];
 
         // buscamos numeros reales
-        if(isdigit(c) || c == '.'){
+        if(isdigit(c) || c == '.' || c== 'e' || c == 'E'){
             // acumular dígitos en aux
             aux += c;
         }
@@ -190,6 +206,9 @@ double Expresion::Evaluar()
             eval.Agregar(stod(aux));
             aux = "";
         }
+        else if((c == '+' || c == '-') && !aux.empty() && (aux.back() == 'e' || aux.back() == 'E')){
+            aux += c;
+        }
         else if(c=='+' || c=='-' || c=='*' || c=='/' || c=='^'){
             b = eval.ObtenerTope(); eval.Eliminar();
             a = eval.ObtenerTope(); eval.Eliminar();
@@ -197,7 +216,10 @@ double Expresion::Evaluar()
             if(c == '+') res = a+b;
             if(c == '-') res = a-b;
             if(c == '*') res = a*b;
-            if(c == '/') res = a/b;
+            if(c == '/'){
+                if(b == 0) throw ExpresionInvalida("Divisi\242n por cero");
+                res = a/b;
+            }
             if(c == '^') res = pow(a,b);
 
             eval.Agregar(res); // y lo metemos a la pila.
@@ -226,9 +248,12 @@ int Expresion::Precedencia(const char a)
 }
 
 // ========================== //
-Expresion::ExpresionInvalida::ExpresionInvalida() noexcept {}
+Expresion::ExpresionInvalida::ExpresionInvalida(const char *msg) noexcept
+{
+    mensaje = msg;
+}
 
 const char *Expresion::ExpresionInvalida::what() const noexcept
 {
-    return "La expresi\242n no es v\240lida para evaluar\n";
+    return mensaje;
 }
